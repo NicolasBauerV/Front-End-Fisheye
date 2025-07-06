@@ -1,3 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Parisienne&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, p, span, a {
+    font-family: "DM Sans";
+}
+
+main {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.header {
+    max-width: 1440px;
+    margin: 0 auto;
+    margin-left: 100px;
+}
+
+.logo {
+    height: 50px;
+}
+
 #contact_modal {
     display: none;
 }
@@ -6,6 +33,83 @@
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 50px;
+}
+
+.photograph-header .photograph-portrait {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    clip-path: circle(50%);
+}
+
+.photograph-header .photographer-name {
+    font-size: 4rem;
+    color: #D3573C;
+    font-weight: 400;
+}
+
+.photograph-header .location {
+    font-size: 1.5rem;
+    color: #901C1C;
+}
+
+.portfolio {
+    margin: 0 100px;
+    display: grid;
+    width: fit-content;
+    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    column-gap: 95px;
+}
+
+.portfolio .media-card {
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+}
+
+.portfolio .photographer-media {
+    object-fit: cover;
+    width: 350px;
+    height: 300px;
+    object-position: center;
+}
+
+.portfolio .media-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.portfolio .media-footer .image-title {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #901C1C;
+}
+
+.portfolio .media-footer .media-likes {
+    display: flex;
+    align-items: center;
+}
+.portfolio .media-footer .media-likes .likes-count {
+    color: #901C1C;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.portfolio .media-footer .media-likes .like-button {
+    background: none;
+    border: none;
+    padding: 0;
+}
+.like-button:hover {
+    cursor: pointer;
 }
 
 .contact_button {
