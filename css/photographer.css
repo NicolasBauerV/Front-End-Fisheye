@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Parisienne&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Parisienne&display=swap");
 
 * {
     padding: 0;
@@ -6,13 +6,18 @@
     box-sizing: border-box;
 }
 
-h1, h2, p, span, a {
+h1,
+h2,
+p,
+span,
+a {
     font-family: "DM Sans";
 }
 
 main {
     max-width: 1440px;
     margin: 0 auto;
+    position: relative;
 }
 
 .header {
@@ -30,7 +35,7 @@ main {
 }
 
 .photograph-header {
-    background-color: #FAFAFA;
+    background-color: #fafafa;
     height: 300px;
     margin: 0 100px;
     display: flex;
@@ -48,19 +53,22 @@ main {
 
 .photograph-header .photographer-name {
     font-size: 4rem;
-    color: #D3573C;
+    color: #d3573c;
     font-weight: 400;
 }
 
 .photograph-header .location {
     font-size: 1.5rem;
-    color: #901C1C;
+    color: #901c1c;
 }
 
 .portfolio {
     margin: 0 100px;
-    display: grid;
     width: fit-content;
+}
+
+.portfolio .media-list {
+    display: grid;
     grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
     flex-wrap: wrap;
     row-gap: 20px;
@@ -90,7 +98,7 @@ main {
 .portfolio .media-footer .image-title {
     font-weight: 400;
     font-size: 1.5rem;
-    color: #901C1C;
+    color: #901c1c;
 }
 
 .portfolio .media-footer .media-likes {
@@ -98,7 +106,7 @@ main {
     align-items: center;
 }
 .portfolio .media-footer .media-likes .likes-count {
-    color: #901C1C;
+    color: #901c1c;
     font-size: 1.5rem;
     font-weight: 500;
 }
@@ -112,6 +120,25 @@ main {
     cursor: pointer;
 }
 
+/* Résumé */
+.resume {
+    display: flex;
+    justify-content: space-between;
+    background-color: #db8876;
+    width: max-content;
+    column-gap: 20px;
+    padding: 15px 30px;
+    border-radius: 5px 5px 0 0;
+    position: fixed;
+    bottom: 0;
+    right: 50px;
+}
+
+.resume .total-likes {
+    display: flex;
+    align-items: center;
+}
+
 .contact_button {
     font-size: 20px;
     font-weight: bold;
@@ -120,14 +147,14 @@ main {
     width: 170px;
     height: 70px;
     border: none;
-    background-color: #901C1C;
+    background-color: #901c1c;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .modal {
     border-radius: 5px;
-    background-color: #DB8876;
+    background-color: #db8876;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -160,7 +187,7 @@ form {
 }
 
 form label {
-    color: #312E2E;
+    color: #312e2e;
     font-size: 36px;
 }
 

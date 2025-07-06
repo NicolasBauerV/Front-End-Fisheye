@@ -38,6 +38,28 @@ class PhotographerApp {
         }
     }
 
+    /**
+     * @description Sorts the media items based on the selected criteria.
+     * @param {Array<MediaController>} medias - Array of media items to be sorted
+     * @returns {Array<MediaController>} - Sorted array of media items
+     */
+    static sortImages(medias) {
+        console.table(medias);
+        
+        const sortBy = document.querySelector("#sort-by-select").value;
+        switch (sortBy) {
+            case "likes":
+                return MediaController.sortByPopularity(medias);
+            case "date":
+                return MediaController.sortByDate(medias);
+            case "title":
+                return MediaController.sortByName(medias);
+            default:
+                console.warn("Unknown sort criteria:", sortBy);
+                return medias;
+        }
+    }
+
     static async init() {
 
         // Récupère les datas des photographes via le paramètre ID
@@ -87,11 +109,64 @@ class PhotographerApp {
         const getPhotographersMedias = await PhotographerApp.photographersMedia(photographerId);
         // Display the photographer's media
         photographerDatas.medias = getPhotographersMedias;  
-        const mediaSection = document.querySelector(".portfolio");
+        const mediaSection = document.querySelector(".media-list");
         photographerDatas.medias.forEach((media) => {
             const mediaCard = media.getMediaCardDOM(name.split(" ")[0].replace("-", "_"));
             mediaSection.appendChild(mediaCard);
         });
+
+        // Set the total likes in the footer
+        const totalLikes = photographerDatas.medias.reduce((sum, media) => sum + media.likes, 0);
+        const totalLikesElement = document.querySelector(".likes-number");
+        if (totalLikesElement) {
+            totalLikesElement.textContent = totalLikes;
+        }
+
+        // Set the price in the footer
+        const pricePerDayElement = document.querySelector(".price");
+        if (pricePerDayElement) {
+            pricePerDayElement.textContent = `${price}€/jour`;
+        }
+
+        // Increment the likes count when the like button is clicked
+        const mediaCards = document.querySelectorAll(".media-card");
+        mediaCards.forEach((mediaCard) => {
+            const likeButton = mediaCard.querySelector(".like-button");
+            const likesCountElement = mediaCard.querySelector(".likes-count");
+            if (likeButton && likesCountElement) {
+                likeButton.addEventListener("click", () => {
+                    const currentLikes = parseInt(likesCountElement.textContent, 10);
+                    likesCountElement.textContent = currentLikes + 1;
+                    const mediaId = parseInt(mediaCard.getAttribute("id"), 10);
+                    const media = photographerDatas.medias.find((m) => m.id === mediaId);
+                    media.likes = currentLikes + 1; // Update the likes in the media object
+                    
+                    // Update the total likes in the footer
+                    if (totalLikesElement) {
+                        const totalLikes = photographerDatas.medias.reduce((sum, m) => sum + m.likes, 0);
+                        totalLikesElement.textContent = totalLikes;
+                    }
+                });
+            }
+        });
+
+        // Add event listener for sorting options
+        const sortBySelect = document.querySelector("#sort-by-select");
+        if (sortBySelect) {
+            sortBySelect.addEventListener("change", () => {
+                console.log("Sorting media by:", sortBySelect.value);
+                
+                const sortedMedias = PhotographerApp.sortImages(photographerDatas.medias);
+                const newMediaSection = document.createElement("div");
+                newMediaSection.classList.add("media-list");
+                mediaSection.parentNode.appendChild(newMediaSection);
+                mediaSection.remove();
+                sortedMedias.forEach((media) => {
+                    const mediaCard = media.getMediaCardDOM(name.split(" ")[0].replace("-", "_"));
+                    newMediaSection.appendChild(mediaCard);
+                });
+            });
+        }
     }
 }
 

@@ -12,7 +12,9 @@
     </head>
     <body>
         <header class="header">
-            <a href="./index.html"><img src="assets/images/logo.png" class="logo" /></a>
+            <a href="./index.html"
+                ><img src="assets/images/logo.png" class="logo"
+            /></a>
         </header>
         <main id="main">
             <div class="photograph-header">
@@ -30,7 +32,41 @@
                     alt="Portrait du photographe"
                 />
             </div>
-            <div role="presentation" class="portfolio"></div>
+            <div role="presentation" class="portfolio">
+                <div class="portfolio-header">
+                    <div class="sort-by">
+                        <h2 class="sort-by-label">Trier par :</span>
+                        <select id="sort-by-select">
+                            <option value="date" selected>Date</option>
+                            <option value="title">Titre</option>
+                            <option value="likes">Popularité</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="media-list" class="media-list"></div>
+            </div>
+            <div role="contentinfo" class="resume">
+                <div aria-label="Total de j'aime reçu" class="total-likes">
+                    <span class="likes-number">0</span>
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.12 3 6.81 3C8.34 3 9.81 3.81 10.75 5.09C11.69 3.81 13.16 3 14.69 3C17.38 3 19.5 5.42 19.5 8.5C19.5 12.28 16.1 15.36 10.95 20L12 21.35Z"
+                            fill="#000000"
+                        />
+                    </svg>
+                </div>
+                <div aria-label="Prix par jour" class="price-per-day">
+                    <span class="price">-</span>
+                    <span class="separator">/</span>
+                    <span class="currency">€</span>
+                </div>
+            </div>
         </main>
         <div id="contact_modal">
             <div class="modal">

@@ -43,19 +43,51 @@ export class MediaController {
         return this._price;
     }
 
+    set likes(newLikes) {
+        this._likes = newLikes;
+    }
+
+    /**
+     * @description Sorts an array of media objects by date in descending order.
+     * @param {MediaController[]} medias - Array of media objects to be sorted.
+     * @returns Sorted array of media objects.
+     */
+    static sortByPopularity(medias) {
+        return medias.sort((a, b) => b.likes - a.likes);
+    }
+
+    /**
+     * @description Sorts an array of media names alphabetically.
+     * @param {string[]} mediasName 
+     * @returns Sorted array of media names.
+     */
+    static sortByName(mediasName) {
+        return mediasName.sort((a, b) => a.title.localeCompare(b.title));
+    }
+
+    /**
+     * @description Sorts an array of media objects by date in descending order.
+     * @param {MediaController[]} medias - Array of media objects to be sorted.
+     * @returns Sorted array of media objects.
+     */
+    static sortByDate(medias) {
+        return medias.sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+
     /**
      * @description Generates the DOM element for the media item.
      * @param {string} photographerName - The name of the photographer, used to construct the image/video path.
-     * @returns {HTMLElement} - The DOM element representing the media item.
+     * @returns The DOM element representing the media item.
      */
     getMediaCardDOM(photographerName) {
         const article = document.createElement("article");
         article.setAttribute("aria-label", this._title);
         article.setAttribute("tabindex", "0");
         article.classList.add("media-card");
+        article.setAttribute("id", this._id);
         const mediaElement = this._image
             ? `<img class="photographer-media" src="assets/images/photos/${photographerName}/${this._image}" alt="${this.title}">`
-            : `<video class="photographer-media" controls><source src="assets/images/photos/${photographerName}/${this._video}" type="video/mp4"></video>`;
+            : `<video class="photographer-media" controls poster="assets/images/miniature.webp"><source src="assets/images/photos/${photographerName}/${this._video}" type="video/mp4"></video>`;
 
         article.innerHTML = `
             ${mediaElement}
