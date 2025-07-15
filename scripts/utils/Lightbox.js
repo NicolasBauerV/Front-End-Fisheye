@@ -79,14 +79,24 @@ export class Lightbox {
 
     _show() {
         this._clear();
+        // Set attributes for accessibility
         this._modal.setAttribute("aria-hidden", "true");
         this._modal.setAttribute("role", "dialog");
         this._modal.setAttribute("aria-modal", "true");
-        const media = this._items[this._currentIndex].cloneNode(true);
-        media.setAttribute("aria-label", `Media ${this._currentIndex + 1} of ${this._items.length}`);
-        media.classList.add("lightbox-media");
-        this._modal.appendChild(media);
-        document.querySelector("#main").style = "display: none;";
+
+        if (this._items[this._currentIndex] !== undefined) {            
+            // Clone the current media item to display
+            const media = this._items[this._currentIndex].cloneNode(true);
+            
+            media.setAttribute("aria-label", `Média ${this._currentIndex + 1} sur ${this._items.length}`);
+            media.classList.add("lightbox-media");
+            
+            if (media.tagName === "VIDEO") {
+                media.setAttribute("controls", "true");
+            }
+            this._modal.appendChild(media);
+            document.querySelector("#main").style = "display: none;";
+        }
     }
 
     _clear() {
@@ -98,12 +108,12 @@ export class Lightbox {
         document.querySelector("#main").style = "display: block;";
     }
 
-        /**
+    /**
      * Traps focus within the lightbox modal to ensure accessibility.
      * This prevents focus from moving outside the modal when using Tab or Shift+Tab.
      * @param {KeyboardEvent} e - The keyboard event triggered by Tab or Shift+Tab.
      */
-    _trapFocus(e) {
+    /*_trapFocus(e) {
         const focusableSelectors = [".close-button", ".previous-button", ".next-button", ".lightbox-media"];
         const focusables = focusableSelectors
             .map(sel => this._modal.querySelector(sel))
@@ -131,4 +141,5 @@ export class Lightbox {
             }
         }
     }
+        */
 }
