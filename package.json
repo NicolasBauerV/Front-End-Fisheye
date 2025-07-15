@@ -1,0 +1,25 @@
+{
+  "name": "front-end-fisheye",
+  "version": "1.0.0",
+  "description": "Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.",
+  "homepage": "https://github.com/NicolasBauerV/Front-End-Fisheye#readme",
+  "bugs": {
+    "url": "https://github.com/NicolasBauerV/Front-End-Fisheye/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicolasBauerV/Front-End-Fisheye.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .js"
+  },
+  "devDependencies": {
+    "eslint": "^9.31.0",
+    "globals": "^16.3.0"
+  }
+}

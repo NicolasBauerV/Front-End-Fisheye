@@ -152,6 +152,69 @@ main {
     cursor: pointer;
 }
 
+/* Light Box Modal */
+.lightbox-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    align-items: center;
+    justify-content: center;
+}
+
+div.lightbox-modal.open {
+    display: flex;
+}
+
+.lightbox {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 80vh;
+}
+
+.lightbox .close-button {
+    position: absolute;
+    top: 0;
+    right: 3rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.lightbox .lightbox-media {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: cover;
+    box-shadow: 5px 0 oklch(82.032% 0.00009 271.152 / 0.9);
+    border-radius: 5px;
+}
+
+.lightbox .previous-button{
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.lightbox .next-button {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 .modal {
     border-radius: 5px;
     background-color: #db8876;
