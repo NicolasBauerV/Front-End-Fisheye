@@ -1,17 +1,14 @@
 import { PhotographerFactory } from "../factory/PhotographerFactory.js";
-import { PhotographerController } from "../controller/PhotographerController.js"; 
 
 /**
- * 
- * @param {Array<PhotographerController>} photographers 
+ *
+ * @param {Array<PhotographerController>} photographers
  */
 function displayData(photographers) {
-    const photographersSection = document.querySelector(
-        ".photographer_section"
-    );
+    const photographersSection = document.querySelector(".photographer_section");
 
     photographersSection.innerHTML = ""; // Clear existing content
-    photographers.forEach((photographer) => {
+    photographers.forEach(photographer => {
         const photographerCard = photographer.getUserCardDOM();
         photographersSection.appendChild(photographerCard);
     });
@@ -25,16 +22,13 @@ async function init() {
             throw new Error(`HTTP error! status: ${dataFile.status}`);
         }
         const data = await dataFile.json();
-        const photographersTab = data.photographers.map((photographerData) =>
+        const photographersTab = data.photographers.map(photographerData =>
             PhotographerFactory.create(photographerData, "photographer")
         );
         displayData(photographersTab);
     } catch (error) {
-        throw new Error(
-            `Error fetching photographer data: ${error.message}`
-        );
+        throw new Error(`Error fetching photographer data: ${error.message}`);
     }
-
 }
 
 init();

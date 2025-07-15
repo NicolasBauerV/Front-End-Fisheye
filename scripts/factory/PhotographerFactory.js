@@ -13,7 +13,7 @@ export class PhotographerFactory {
      * @throws {Error} - If the type is unknown.
      */
     static create(data, type) {
-            switch(type) {
+        switch (type) {
             case "photographer":
                 return new PhotographerController(data);
             case "media":

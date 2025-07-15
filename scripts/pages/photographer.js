@@ -28,12 +28,12 @@ class PhotographerApp {
                 throw new Error(`HTTP error! status: ${fetchMedia.status}`);
             }
             const data = await fetchMedia.json();
-            const medias = data.media.map((mediaData) =>
+            const medias = data.media.map(mediaData =>
                 PhotographerFactory.create(mediaData, "media")
             );
 
             // Associate medias with their respective photographers
-            return medias.filter((media) => media.photographerId === id);
+            return medias.filter(media => media.photographerId === id);
         } catch (error) {
             console.error("Error fetching media data:", error);
             throw new Error(`Error fetching media data: ${error.message}`);
@@ -46,8 +46,6 @@ class PhotographerApp {
      * @returns {Array<MediaController>} - Sorted array of media items
      */
     static sortImages(medias) {
-        console.table(medias);
-
         const sortBy = document.querySelector("#sort-by-select").value;
         switch (sortBy) {
             case "likes":
@@ -80,10 +78,8 @@ class PhotographerApp {
         }
 
         // Fetch photographer data by ID
-        const photographerDatas =
-            await PhotographerController.getPhotographerById(photographerId);
-        const { id, name, city, country, tagline, price, portrait } =
-            photographerDatas;
+        const photographerDatas = await PhotographerController.getPhotographerById(photographerId);
+        const { name, city, country, tagline, price, portrait } = photographerDatas;
         if (!photographerDatas) {
             console.error("Photographer not found");
             window.location.href = "index.html"; // Redirect to index if photographer not found
@@ -108,16 +104,12 @@ class PhotographerApp {
         }
 
         // Get Portfolio section
-        const getPhotographersMedias = await PhotographerApp.photographersMedia(
-            photographerId
-        );
+        const getPhotographersMedias = await PhotographerApp.photographersMedia(photographerId);
         // Display the photographer's media
         photographerDatas.medias = getPhotographersMedias;
         const mediaSection = document.querySelector(".media-list");
-        photographerDatas.medias.forEach((media) => {
-            const mediaCard = media.getMediaCardDOM(
-                name.split(" ")[0].replace("-", "_")
-            );
+        photographerDatas.medias.forEach(media => {
+            const mediaCard = media.getMediaCardDOM(name.split(" ")[0].replace("-", "_"));
             // Set tabindex for accessibility
             mediaCard.children[0].setAttribute("tabindex", "0");
             mediaCard.setAttribute("id", media.id);
@@ -127,10 +119,7 @@ class PhotographerApp {
         });
 
         // Set the total likes in the footer
-        const totalLikes = photographerDatas.medias.reduce(
-            (sum, media) => sum + media.likes,
-            0
-        );
+        const totalLikes = photographerDatas.medias.reduce((sum, media) => sum + media.likes, 0);
         const totalLikesElement = document.querySelector(".likes-number");
         if (totalLikesElement) {
             totalLikesElement.textContent = totalLikes;
@@ -142,10 +131,7 @@ class PhotographerApp {
             pricePerDayElement.textContent = `${price}`;
         }
 
-        PhotographerApp.attachLikeListeners(
-            photographerDatas,
-            totalLikesElement
-        );
+        PhotographerApp.attachLikeListeners(photographerDatas, totalLikesElement);
         const mediaEls = document.querySelectorAll(".media-card img, .media-card video");
         new Lightbox(".lightbox-modal .lightbox", mediaEls);
 
@@ -153,25 +139,18 @@ class PhotographerApp {
         const sortBySelect = document.querySelector("#sort-by-select");
         if (sortBySelect) {
             sortBySelect.addEventListener("change", () => {
-                const sortedMedias = PhotographerApp.sortImages(
-                    photographerDatas.medias
-                );
+                const sortedMedias = PhotographerApp.sortImages(photographerDatas.medias);
                 // Clear the media section before re-adding sorted items
                 mediaSection.innerHTML = "";
 
-                sortedMedias.forEach((media) => {
-                    const mediaCard = media.getMediaCardDOM(
-                        name.split(" ")[0].replace("-", "_")
-                    );
+                sortedMedias.forEach(media => {
+                    const mediaCard = media.getMediaCardDOM(name.split(" ")[0].replace("-", "_"));
                     // Set tabindex for accessibility
                     mediaCard.children[0].setAttribute("tabindex", "0");
                     mediaSection.appendChild(mediaCard);
                 });
                 // Re-attach like listeners after sorting
-                PhotographerApp.attachLikeListeners(
-                    photographerDatas,
-                    totalLikesElement
-                );
+                PhotographerApp.attachLikeListeners(photographerDatas, totalLikesElement);
                 const mediaEls = document.querySelectorAll(".media-card img, .media-card video");
                 new Lightbox(".lightbox-modal .lightbox", mediaEls);
             });
@@ -186,20 +165,15 @@ class PhotographerApp {
      */
     static attachLikeListeners(photographerDatas, totalLikesElement) {
         const mediaCards = document.querySelectorAll(".media-card");
-        mediaCards.forEach((mediaCard) => {
+        mediaCards.forEach(mediaCard => {
             const likeButton = mediaCard.querySelector(".like-button");
             const likesCountElement = mediaCard.querySelector(".likes-count");
             if (likeButton && likesCountElement) {
                 likeButton.addEventListener("click", () => {
-                    const currentLikes = parseInt(
-                        likesCountElement.textContent,
-                        10
-                    );
+                    const currentLikes = parseInt(likesCountElement.textContent, 10);
                     likesCountElement.textContent = currentLikes + 1;
                     const mediaId = parseInt(mediaCard.getAttribute("id"), 10);
-                    const media = photographerDatas.medias.find(
-                        (m) => m.id === mediaId
-                    );
+                    const media = photographerDatas.medias.find(m => m.id === mediaId);
                     media.likes = currentLikes + 1;
                     if (totalLikesElement) {
                         const totalLikes = photographerDatas.medias.reduce(
@@ -212,7 +186,6 @@ class PhotographerApp {
             }
         });
     }
-    
 }
 
 PhotographerApp.init();

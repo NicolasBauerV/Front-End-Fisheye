@@ -42,10 +42,10 @@ export class PhotographerController {
     }
 
     /**
-     * @description Fetches a photographer by their ID.
      * @async
+     * Fetches a photographer by their ID.
      * @param {number} id
-     * @returns
+     * @returns {Promise<Object>} A promise that resolves to the photographer data.
      */
     static async getPhotographerById(id) {
         try {
@@ -54,13 +54,12 @@ export class PhotographerController {
                 throw new Error(`HTTP error! status: ${photographers.status}`);
             }
             const data = await photographers.json();
-            return data.photographers.find((photographer) => photographer.id === id);
+            return data.photographers.find(photographer => photographer.id === id);
         } catch (error) {
             console.error("Error fetching photographer by ID:", error);
             throw error;
         }
     }
-
 
     // Function to create the photographer card DOM element
     getUserCardDOM() {

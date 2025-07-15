@@ -21,27 +21,25 @@ export class Lightbox {
     _bindEvents() {
         this._items.forEach((el, idx) => {
             el.addEventListener("click", () => this.open(idx));
-            el.addEventListener("keydown", (e) => {
-                if (e.key === "Enter") this.open(idx);
+            el.addEventListener("keydown", e => {
+                if (e.key === "Enter") {
+                    this.open(idx);
+                }
             });
         });
-        this._modal
-            .querySelector(".close-button")
-            .addEventListener("click", () => this.close());
-        this._modal
-            .querySelector(".previous-button")
-            .addEventListener("click", () => this.prev());
-        this._modal
-            .querySelector(".previous-button")
-            .addEventListener("keydown", (e) => {
-                if (e.key === "ArrowLeft") this.prev();
-            });
-        this._modal
-            .querySelector(".next-button")
-            .addEventListener("click", () => this.next());
+        this._modal.querySelector(".close-button").addEventListener("click", () => this.close());
+        this._modal.querySelector(".previous-button").addEventListener("click", () => this.prev());
+        this._modal.querySelector(".previous-button").addEventListener("keydown", e => {
+            if (e.key === "ArrowLeft") {
+                this.prev();
+            }
+        });
+        this._modal.querySelector(".next-button").addEventListener("click", () => this.next());
 
-        document.addEventListener("keydown", (e) => {
-            if (!this._modal.parentElement.classList.contains("open")) return;
+        document.addEventListener("keydown", e => {
+            if (!this._modal.parentElement.classList.contains("open")) {
+                return;
+            }
             switch (e.key) {
                 case "Escape":
                     this.close();
@@ -75,39 +73,45 @@ export class Lightbox {
         this._show();
     }
     prev() {
-        this._currentIndex =
-            (this._currentIndex - 1 + this._items.length) % this._items.length;
+        this._currentIndex = (this._currentIndex - 1 + this._items.length) % this._items.length;
         this._show();
     }
 
     _show() {
         this._clear();
+        this._modal.setAttribute("aria-hidden", "true");
+        this._modal.setAttribute("role", "dialog");
+        this._modal.setAttribute("aria-modal", "true");
         const media = this._items[this._currentIndex].cloneNode(true);
+        media.setAttribute("aria-label", `Media ${this._currentIndex + 1} of ${this._items.length}`);
         media.classList.add("lightbox-media");
         this._modal.appendChild(media);
+        document.querySelector("#main").style = "display: none;";
     }
 
     _clear() {
         const old = this._modal.querySelector(".lightbox-media");
-        if (old) old.remove();
+        if (old) {
+            old.remove();
+        }
+        this._modal.setAttribute("aria-hidden", "false");
+        document.querySelector("#main").style = "display: block;";
     }
 
-    /**
+        /**
      * Traps focus within the lightbox modal to ensure accessibility.
      * This prevents focus from moving outside the modal when using Tab or Shift+Tab.
      * @param {KeyboardEvent} e - The keyboard event triggered by Tab or Shift+Tab.
      */
     _trapFocus(e) {
-        const focusableSelectors = [
-            ".close-button",
-            ".previous-button",
-            ".next-button",
-        ];
+        const focusableSelectors = [".close-button", ".previous-button", ".next-button", ".lightbox-media"];
         const focusables = focusableSelectors
-            .map((sel) => this._modal.querySelector(sel))
-            .filter((el) => el);
+            .map(sel => this._modal.querySelector(sel))
+            .filter(el => el);
 
-        if (!focusables.length) return;
+        if (!focusables.length) {
+            return;
+        }
 
         const firstEl = focusables[0];
         const lastEl = focusables[focusables.length - 1];

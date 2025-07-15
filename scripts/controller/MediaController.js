@@ -1,14 +1,5 @@
 export class MediaController {
-    constructor({
-        id,
-        photographerId,
-        title,
-        image,
-        video,
-        likes,
-        date,
-        price,
-    }) {
+    constructor({ id, photographerId, title, image, video, likes, date, price }) {
         this._id = id;
         this._photographerId = photographerId;
         this._title = title;
@@ -58,7 +49,7 @@ export class MediaController {
 
     /**
      * @description Sorts an array of media names alphabetically.
-     * @param {string[]} mediasName 
+     * @param {string[]} mediasName
      * @returns Sorted array of media names.
      */
     static sortByName(mediasName) {
