@@ -1,11 +1,9 @@
 import { PhotographerFactory } from "../factory/PhotographerFactory.js";
 import { PhotographerController } from "../controller/PhotographerController.js";
-import { MediaController } from "../controller/MediaController.js";
 import { Lightbox } from "../utils/Lightbox.js";
 import { ContactForm } from "../utils/ContactForm.js";
 import { SelectComponent } from "../utils/SelectComponent.js";
 
-// après avoir généré tes mediaCards
 const mediaEls = document.querySelectorAll(".media-card img, .media-card video");
 new Lightbox(".lightbox-modal .lightbox", mediaEls);
 class PhotographerApp {

@@ -119,7 +119,6 @@ export class SelectComponent {
     updateDom(sortedMedias) {
         const mediaSection = document.querySelector(".media-list");
         mediaSection.innerHTML = ""; // Clear existing media cards
-        console.table(sortedMedias);
         sortedMedias.forEach(media => {
             const mediaCard = media.getMediaCardDOM(
                 this._photographerDatas.name.split(" ")[0].replace("-", "_")

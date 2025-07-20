@@ -28,8 +28,8 @@ export default defineConfig([
             // Toujours terminer les instructions par un point‑virgule
             semi: ["error", "always"],
 
-            // Tolérer console.warn et console.error mais signaler les autres
-            "no-console": ["warn", { allow: ["warn", "error"] }],
+            // Tolérer console.warn, console.error et console.log mais signaler les autres
+            "no-console": ["warn", { allow: ["warn", "error", "log"] }],
 
             // Imposer un espace à l’intérieur des accolades d’objets
             "object-curly-spacing": ["error", "always"],
