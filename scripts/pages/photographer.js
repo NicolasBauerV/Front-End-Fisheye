@@ -2,6 +2,8 @@ import { PhotographerFactory } from "../factory/PhotographerFactory.js";
 import { PhotographerController } from "../controller/PhotographerController.js";
 import { MediaController } from "../controller/MediaController.js";
 import { Lightbox } from "../utils/Lightbox.js";
+import { ContactForm } from "../utils/ContactForm.js";
+import { SelectComponent } from "../utils/SelectComponent.js";
 
 // après avoir généré tes mediaCards
 const mediaEls = document.querySelectorAll(".media-card img, .media-card video");
@@ -37,26 +39,6 @@ class PhotographerApp {
         } catch (error) {
             console.error("Error fetching media data:", error);
             throw new Error(`Error fetching media data: ${error.message}`);
-        }
-    }
-
-    /**
-     * @description Sorts the media items based on the selected criteria.
-     * @param {Array<MediaController>} medias - Array of media items to be sorted
-     * @returns {Array<MediaController>} - Sorted array of media items
-     */
-    static sortImages(medias) {
-        const sortBy = document.querySelector("#sort-by-select").value;
-        switch (sortBy) {
-            case "likes":
-                return MediaController.sortByPopularity(medias);
-            case "date":
-                return MediaController.sortByDate(medias);
-            case "title":
-                return MediaController.sortByName(medias);
-            default:
-                console.warn("Unknown sort criteria:", sortBy);
-                return medias;
         }
     }
 
@@ -135,26 +117,13 @@ class PhotographerApp {
         const mediaEls = document.querySelectorAll(".media-card img, .media-card video");
         new Lightbox(".lightbox-modal .lightbox", mediaEls);
 
-        // Add event listener for sorting options
-        const sortBySelect = document.querySelector("#sort-by-select");
-        if (sortBySelect) {
-            sortBySelect.addEventListener("change", () => {
-                const sortedMedias = PhotographerApp.sortImages(photographerDatas.medias);
-                // Clear the media section before re-adding sorted items
-                mediaSection.innerHTML = "";
+        // Initialize the select component
+        const selectComponent = new SelectComponent(photographerDatas, totalLikesElement);
+        selectComponent.init();
 
-                sortedMedias.forEach(media => {
-                    const mediaCard = media.getMediaCardDOM(name.split(" ")[0].replace("-", "_"));
-                    // Set tabindex for accessibility
-                    mediaCard.children[0].setAttribute("tabindex", "0");
-                    mediaSection.appendChild(mediaCard);
-                });
-                // Re-attach like listeners after sorting
-                PhotographerApp.attachLikeListeners(photographerDatas, totalLikesElement);
-                const mediaEls = document.querySelectorAll(".media-card img, .media-card video");
-                new Lightbox(".lightbox-modal .lightbox", mediaEls);
-            });
-        }
+        // Initialize the contact form
+        const contactForm = new ContactForm();
+        contactForm.init();
     }
 
     /**
