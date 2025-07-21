@@ -1,11 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Parisienne&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+p,
+span,
+label,
+a {
+    font-family: "DM Sans";
+}
+
+main {
+    max-width: 1440px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.header {
+    max-width: 1440px;
+    margin: 0 auto;
+    margin-left: 100px;
+    padding-block: 40px;
+}
+
+.logo {
+    height: 50px;
+}
+
 #contact_modal {
     display: none;
 }
 
 .photograph-header {
-    background-color: #FAFAFA;
+    background-color: #fafafa;
     height: 300px;
     margin: 0 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 50px;
+}
+
+.photograph-header .cell {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 33%;
+}
+
+.photograph-header .cell:not(:first-child) {
+    justify-content: center;
+    align-items: center;
+}
+
+.photograph-header .photograph-portrait {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    clip-path: circle(50%);
+}
+
+.photograph-header .photographer-name {
+    font-size: 4rem;
+    color: #d3573c;
+    font-weight: 400;
+}
+
+.photograph-header .location {
+    font-size: 1.5rem;
+    color: #901c1c;
+    font-weight: 400;
+
+}
+.photograph-header .tagline {
+    margin-top: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.portfolio {
+    margin: 0 100px;
+    width: fit-content;
+}
+/* ##### DIV Selector for Select Wrapper ##### */
+
+.portfolio .sort-by {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    padding-bottom: 5%;
+}
+
+
+/* On active dropdown */
+.portfolio .portfolio-header .sort-by .open {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.portfolio .portfolio-header .sort-by #sort-select:focus {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.portfolio .portfolio-header .sort-by .sr-only {
+    font-weight: bold;
+}
+
+.portfolio .portfolio-header .sort-by #sort-select {
+    position: absolute;
+    top: -10px;
+    left: 5%;
+    color: white;
+    font-family: "DM Sans";
+    width: 170px;
+    margin-left: 1.5rem;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: #901C1C;
+    border-radius: 5px;
+}
+
+.portfolio .portfolio-header .sort-by #sort-select .option {
+    position: relative;
+    padding-block: 23px;
+    padding-left: 20px;
+    list-style: none;
+}
+
+.portfolio .portfolio-header .sort-by .open .option:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background-color: #fff;
+}
+
+.portfolio .portfolio-header .sort-by #sort-select .option:hover {
+    cursor: pointer;
+}
+
+/* fleches dropdown placement */
+.portfolio .portfolio-header .sort-by .open .option:first-child::after {
+    content: url("/assets/icons/arrow_up.svg");
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+}
+
+.portfolio .portfolio-header .sort-by .option[aria-selected="true"]::after {
+    content: url("/assets/icons/arrow_down.svg");
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+}
+
+.portfolio .media-list {
+    display: grid;
+    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    column-gap: 95px;
+}
+
+.portfolio .media-card {
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+}
+
+.portfolio .photographer-media {
+    object-fit: cover;
+    width: 350px;
+    height: 300px;
+    object-position: center;
+}
+
+.portfolio .media-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.portfolio .media-footer .image-title {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #901c1c;
+}
+
+.portfolio .media-footer .media-likes {
+    display: flex;
+    align-items: center;
+}
+.portfolio .media-footer .media-likes .likes-count {
+    color: #901c1c;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.portfolio .media-footer .media-likes .like-button {
+    background: none;
+    border: none;
+    padding: 0;
+}
+.like-button:hover {
+    cursor: pointer;
+}
+
+/* Résumé */
+.resume {
+    display: flex;
+    justify-content: space-between;
+    background-color: #db8876;
+    width: max-content;
+    column-gap: 20px;
+    padding: 15px 30px;
+    border-radius: 5px 5px 0 0;
+    position: fixed;
+    bottom: 0;
+    right: 50px;
+}
+
+.resume .total-likes {
+    display: flex;
+    align-items: center;
 }
 
 .contact_button {
@@ -16,14 +248,85 @@
     width: 170px;
     height: 70px;
     border: none;
-    background-color: #901C1C;
+    background-color: #901c1c;
     border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.15s ease-in;
+}
+
+.contact_button:hover {
+    transition: all 0.15s ease-out;
+    background-color: #DB8876;
+    color: #000;
+}
+
+/* Light Box Modal */
+.lightbox-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    align-items: center;
+    justify-content: center;
+}
+
+div.lightbox-modal.open {
+    display: flex;
+}
+
+.lightbox {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 80vh;
+}
+
+.lightbox .close-button {
+    position: absolute;
+    top: 0;
+    right: 3rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.lightbox .lightbox-media {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: cover;
+    box-shadow: 5px 0 oklch(82.032% 0.00009 271.152 / 0.9);
+    border-radius: 5px;
+}
+
+.lightbox .previous-button{
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.lightbox .next-button {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
     cursor: pointer;
 }
 
 .modal {
+    position: relative;
     border-radius: 5px;
-    background-color: #DB8876;
+    background-color: #db8876;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -31,6 +334,16 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    box-shadow: -5px 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.modal .close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .modal header {
@@ -45,7 +358,7 @@
 .modal header h2 {
     font-size: 64px;
     font-weight: normal;
-    text-align: center;
+    margin-bottom: 1.2rem;
 }
 
 form {
@@ -56,7 +369,7 @@ form {
 }
 
 form label {
-    color: #312E2E;
+    color: #312e2e;
     font-size: 36px;
 }
 
@@ -70,7 +383,21 @@ form div {
 
 form input {
     width: 100%;
-    height: 68px;
+    padding: 10px;
     border: none;
     border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+form #submit-button {
+    margin-top: 1rem;
 }
