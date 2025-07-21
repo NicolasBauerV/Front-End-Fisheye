@@ -25,6 +25,7 @@ main {
     max-width: 1440px;
     margin: 0 auto;
     margin-left: 100px;
+    padding-block: 40px;
 }
 
 .logo {
@@ -45,6 +46,17 @@ main {
     padding-inline: 50px;
 }
 
+.photograph-header .cell {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 33%;
+}
+
+.photograph-header .cell:not(:first-child) {
+    justify-content: center;
+    align-items: center;
+}
+
 .photograph-header .photograph-portrait {
     height: 200px;
     width: 200px;
@@ -61,6 +73,13 @@ main {
 .photograph-header .location {
     font-size: 1.5rem;
     color: #901c1c;
+    font-weight: 400;
+
+}
+.photograph-header .tagline {
+    margin-top: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 400;
 }
 
 .portfolio {
@@ -305,6 +324,7 @@ div.lightbox-modal.open {
 }
 
 .modal {
+    position: relative;
     border-radius: 5px;
     background-color: #db8876;
     width: 50%;
@@ -314,6 +334,16 @@ div.lightbox-modal.open {
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    box-shadow: -5px 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.modal .close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .modal header {
@@ -328,7 +358,7 @@ div.lightbox-modal.open {
 .modal header h2 {
     font-size: 64px;
     font-weight: normal;
-    text-align: center;
+    margin-bottom: 1.2rem;
 }
 
 form {
@@ -353,7 +383,21 @@ form div {
 
 form input {
     width: 100%;
-    height: 68px;
+    padding: 10px;
     border: none;
     border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+form #submit-button {
+    margin-top: 1rem;
 }

@@ -8,6 +8,9 @@ export class ContactForm {
 
     init() {
         const form = this.modal.querySelector("form");
+        const formTitle = this.modal.querySelector(".modal-title");
+        formTitle.innerHTML = `Contactez-moi <br> ${document.querySelector(".photographer-name").textContent}`;
+        formTitle.setAttribute("aria-label", `Titre de la fenêtre de contact : Contactez-moi ${document.querySelector(".photographer-name").textContent}`);
         this.contactButton.addEventListener("click", () => this.displayModal());
         this.closeButton.addEventListener("click", () => this.closeModal());
         form.addEventListener("submit", (event) => {
